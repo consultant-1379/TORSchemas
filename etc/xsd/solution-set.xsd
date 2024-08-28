@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:include schemaLocation="common.xsd" />
+    <xs:element name="solutionset">
+        <xs:complexType>
+            <xs:sequence>
+                <!-- Solutiuon Set name -->
+                <xs:element name="name" type="solutionsetNameType"
+                    minOccurs="1" maxOccurs="1" />
+
+                <!-- Solution Set description -->
+                <xs:element name="description" type="xs:string"
+                    minOccurs="1" maxOccurs="1" />
+
+                <!-- Solution Set version in numerical format -->
+                <xs:element name="version" type="versionType" minOccurs="0"
+                    maxOccurs="1"/>
+
+                <!-- Solution Set type -->
+                <xs:element name="type" type="solutionsetTypeType" minOccurs="1" maxOccurs="1"/>
+
+                <!-- list of components which make up this solution set -->
+                <xs:element name="components" minOccurs="0" maxOccurs="1">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="component" type="componentType" minOccurs="0" maxOccurs="unbounded" />
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+
+                <!-- solution set dependencies -->
+                <!--<xs:element name="dependencies" type="solutionsetDependencyListType" minOccurs="0" maxOccurs="1"/> -->
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element> <!-- "solutionset" -->
+</xs:schema>

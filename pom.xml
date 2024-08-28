@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.ericsson.nms</groupId>
+		<artifactId>integration</artifactId>
+		<version>15.2.0.20</version>
+	</parent>
+	<groupId>com.ericsson.nms</groupId>
+	<artifactId>TORSchemas</artifactId>
+    <version>1.0.6-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<description>
+        Schemas for defining solution sets.
+	</description>
+
+	<modules>
+		<module>solution-set-xsd</module>
+		<module>xsd-validation</module>
+  </modules>
+    <reporting>
+      <plugins>
+        <plugin>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-project-info-reports-plugin</artifactId>
+              <version>2.5</version>
+              <reportSets>
+        <reportSet>
+          <reports>
+            <!-- report>cim</report -->
+            <!-- report>dependencies</report -->
+            <!-- report>dependency-convergence</report -->
+            <!-- report>dependency-management</report -->
+            <!-- report>distribution-management</report -->
+            <!-- report>index</report -->
+            <!-- report>issue-tracking</report -->
+            <!-- report>license</report -->
+            <!-- report>mailing-list</report -->
+            <!-- report>modules</report -->
+            <!-- report>plugin-management</report -->
+            <!-- report>plugins</report -->
+            <!-- report>project-team</report -->
+            <!-- report>scm</report -->
+            <!-- report>summary</report -->
+          </reports>
+        </reportSet>
+              </reportSets>
+        </plugin>
+      </plugins>
+    </reporting>
+</project>

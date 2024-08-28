@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<componentDefinition xmlns:tor-ss="http://www.ericsson.com/tor-ss"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema-instance"
+    xs:schemaLocation="http://www.ericsson.com/tor-ss ../xsd/solutionset.xsd">
+    <component>
+        <name>ERICapp2_CXP1112233</name>
+        <version>1.5.2.3</version>
+    </component>
+    <description>
+        A second component in this solution set.
+    </description>
+    <availabilityModel>SINGLETON</availabilityModel>
+    <deploymentRules>
+        <restartRequired>true</restartRequired>
+        <sameCluster>
+            <requiredServices>
+                <service>ModelService</service>
+                <service>TopologyService</service>
+            </requiredServices>
+        </sameCluster>
+    </deploymentRules>
+
+    <systemConfiguration>
+        <users>
+            <user>
+                <username>applusr</username>
+                <userid>1001</userid>
+                <primaryGroup>
+                    <groupname>appluser</groupname>
+                    <groupid>1001</groupid>
+                </primaryGroup>
+            </user>
+        </users>
+    </systemConfiguration>
+
+    <!-- TODO: define the network configuration -->
+
+    <storageConfiguration>
+        <filesystem>
+            <mountpoint>/var/opt/ericsson/ericapp1</mountpoint>
+            <deviceType>NAS</deviceType>
+            <minimumSize>5G</minimumSize> <!-- TODO: define scaling factors -->
+        </filesystem>
+    </storageConfiguration>
+</componentDefinition>

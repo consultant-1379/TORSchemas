@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+    <xs:include schemaLocation="litp_component.xsd" />
+    <xs:include schemaLocation="litp_componentdefinition.xsd" />
+    <xs:include schemaLocation="baseitem.xsd" />
+
+    <xs:complexType name="litp_solutionset-restricted-type">
+        <xs:complexContent>
+            <xs:restriction base="baseitem-type">
+                <xs:sequence>
+
+
+                </xs:sequence>
+            </xs:restriction>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="litp_solutionset-type">
+        <xs:complexContent>
+            <xs:extension base="litp_solutionset-restricted-type">
+                <xs:sequence>
+                    <xs:element name="description" minOccurs="0" maxOccurs="1">
+                        <xs:annotation>
+                            <xs:documentation>
+                            A brief description of this solution set
+                            </xs:documentation>
+                        </xs:annotation>
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:pattern value=".*"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="name" minOccurs="0" maxOccurs="1">
+                        <xs:annotation>
+                            <xs:documentation>
+                            The name of this solution set.
+                            </xs:documentation>
+                        </xs:annotation>
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:pattern value="[0-9a-zA-Z]+"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="type" minOccurs="0" maxOccurs="1">
+                        <xs:annotation>
+                            <xs:documentation>
+                            The type of solution set. A basic solution set is one that is required to enable
+ basic functionality of the TOR platform. A commercial solution set is one which provides
+ a solution of direct benefit to a customer
+                            </xs:documentation>
+                        </xs:annotation>
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:pattern value="(BASIC)|(COMMERCIAL)"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="version" minOccurs="0" maxOccurs="1">
+                        <xs:annotation>
+                            <xs:documentation>
+                            The version of the solution set
+                            </xs:documentation>
+                        </xs:annotation>
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:pattern value="[0-9]*\.?[0-9]*\.?[0-9]*"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+                    <xs:element ref="litp_component" minOccurs="0" maxOccurs="unbounded" />
+                    <xs:element ref="litp_componentdefinition" minOccurs="0" maxOccurs="unbounded" />
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:element name="litp_solutionset" type="litp_solutionset-type" substitutionGroup="baseitem" />
+</xs:schema>

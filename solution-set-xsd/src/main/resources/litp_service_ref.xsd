@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+
+    <xs:include schemaLocation="baseitem.xsd" />
+
+    <xs:complexType name="litp_service_ref-restricted-type">
+        <xs:complexContent>
+            <xs:restriction base="baseitem-type">
+                <xs:sequence>
+
+
+                </xs:sequence>
+            </xs:restriction>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="litp_service_ref-type">
+        <xs:complexContent>
+            <xs:extension base="litp_service_ref-restricted-type">
+                <xs:sequence>
+                    <xs:element name="name" minOccurs="0" maxOccurs="1">
+                        <xs:annotation>
+                            <xs:documentation>
+                            This is the Service name referenced. 
+                            </xs:documentation>
+                        </xs:annotation>
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:pattern value="[\w\-\._/]+"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="version" minOccurs="0" maxOccurs="1">
+                        <xs:annotation>
+                            <xs:documentation>
+                            Version of this item (Miajor.Minor.Micro)
+                            </xs:documentation>
+                        </xs:annotation>
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:pattern value="[0-9]*\.?[0-9]*\.?[0-9]*"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:element name="litp_service_ref" type="litp_service_ref-type" substitutionGroup="baseitem" />
+</xs:schema>

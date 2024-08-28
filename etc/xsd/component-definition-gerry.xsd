@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- to be mapped in as required to component.xsd and removed -->
+
+<xs:schema id="NewDataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+  <xs:element name="required-services">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="service-id" type="xs:string" minOccurs="0" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="not-allowed-services">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="service-id" type="xs:string" minOccurs="0" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="required-caches">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="cache-name" type="xs:string" minOccurs="0" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="component-definition">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="component" type="xs:string" minOccurs="1" />
+        <xs:element name="service-id" type="xs:string" minOccurs="1" />
+        <xs:element name="service-version" type="xs:string" minOccurs="0" />
+        <xs:element name="data-deployment-directory" type="xs:string" minOccurs="0" />
+        <xs:element name="availability-model" type="xs:string" minOccurs="0" />
+        <xs:element name="solution-set" type="xs:string" minOccurs="0" />
+        <xs:element name="runtime-service-dependencies" type="xs:string" minOccurs="0" />
+        <xs:element name="declared-use-cases" type="xs:string" minOccurs="0" />
+        <xs:element name="channels" type="xs:string" minOccurs="0" />
+        <xs:element name="modeled-events" type="xs:string" minOccurs="0" />
+        <xs:element name="named-caches" type="xs:string" minOccurs="0" />
+        <xs:element name="licenses" type="xs:string" minOccurs="0" />
+        <xs:element name="instrumentation" type="xs:string" minOccurs="0" />
+        <xs:element name="provided-by" minOccurs="0" maxOccurs="unbounded">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="package" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="upgrade-path" minOccurs="0" maxOccurs="unbounded">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="can-upgrade-from" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="version" nillable="true" minOccurs="0" maxOccurs="unbounded">
+                      <xs:complexType>
+                        <xs:simpleContent msdata:ColumnName="version_Text" msdata:Ordinal="0">
+                          <xs:extension base="xs:string">
+                          </xs:extension>
+                        </xs:simpleContent>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="deployment-rules" minOccurs="0" maxOccurs="unbounded">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="restart-required" type="xs:string" minOccurs="0" />
+              <xs:element name="same-host" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element ref="required-services" minOccurs="0" maxOccurs="unbounded" />
+                    <xs:element ref="not-allowed-services" minOccurs="0" maxOccurs="unbounded" />
+                    <xs:element ref="required-caches" minOccurs="0" maxOccurs="unbounded" />
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="same-jvm" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element ref="required-services" minOccurs="0" maxOccurs="unbounded" />
+                    <xs:element ref="required-caches" minOccurs="0" maxOccurs="unbounded" />
+                    <xs:element ref="not-allowed-services" minOccurs="0" maxOccurs="unbounded" />
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="system-resources" minOccurs="0" maxOccurs="unbounded">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="compute" type="xs:string" minOccurs="0" />
+              <xs:element name="memory" type="xs:string" minOccurs="0" />
+              <xs:element name="mount-points" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="mount-point" minOccurs="0" maxOccurs="unbounded">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="path" type="xs:string" minOccurs="0" />
+                          <xs:element name="local" type="xs:string" minOccurs="0" />
+                          <xs:element name="min-size" type="xs:string" minOccurs="0" />
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="system-configuration" minOccurs="0" maxOccurs="unbounded">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="selinux-policy" type="xs:string" minOccurs="0" />
+              <xs:element name="user-configuration" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="user-name" type="xs:string" minOccurs="0" />
+                    <xs:element name="UID" type="xs:string" minOccurs="0" />
+                    <xs:element name="selinux-context" type="xs:string" minOccurs="0" />
+                    <xs:element name="groups" minOccurs="0" maxOccurs="unbounded">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="group" minOccurs="0" maxOccurs="unbounded">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="group-name" type="xs:string" minOccurs="0" />
+                                <xs:element name="GID" type="xs:string" minOccurs="0" />
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="network-configuration" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="vlan" type="xs:string" minOccurs="0" />
+                    <xs:element name="firewall" minOccurs="0" maxOccurs="unbounded">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="rule" minOccurs="0" maxOccurs="unbounded">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="source-port" type="xs:string" minOccurs="0" />
+                                <xs:element name="destination-port" type="xs:string" minOccurs="0" />
+                                <xs:element name="protocol" type="xs:string" minOccurs="0" />
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element ref="required-services" />
+        <xs:element ref="not-allowed-services" />
+        <xs:element ref="required-caches" />
+        <xs:element ref="component-definition" />
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

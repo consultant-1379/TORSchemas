@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:include schemaLocation="common.xsd" />
+    <xs:element name="componentDefinition">
+        <xs:complexType>
+            <xs:sequence>
+                <!-- component name and version -->
+                <xs:element name="component" type="componentType" minOccurs="1" maxOccurs="1" />
+                <xs:element name="description" type="xs:string" minOccurs="1" maxOccurs="1" />
+                <xs:element name="availabilityModel" type="availabilityModelType" minOccurs="1" maxOccurs="1" />
+
+                <!-- services this component provides -->
+                <xs:element name="services" type="serviceListType" minOccurs="0" maxOccurs="1" />
+                <!-- Rules governing how this component can be deployed alongside other components and caches -->
+                <xs:element name="deploymentRules" minOccurs="0" maxOccurs="unbounded">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="restartRequired" type="xs:boolean" minOccurs="0" />
+                            <xs:element name="sameJvm" type="deploymentConstraintsType" minOccurs="0" maxOccurs="unbounded" />
+                            <xs:element name="sameHost" type="deploymentConstraintsType" minOccurs="0" maxOccurs="unbounded" />
+                            <xs:element name="sameCluster" type="deploymentConstraintsType" minOccurs="0" maxOccurs="unbounded" />
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+
+                <xs:element name="systemConfiguration" minOccurs="0" maxOccurs="1">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <!-- list of users required by this component -->
+                            <xs:element name="users" minOccurs="0" maxOccurs="1">
+                                <xs:annotation>
+                                    <xs:documentation>
+                                        List of users required by this component. If they do not already exist they will be created.
+                                    </xs:documentation>
+                                </xs:annotation>
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="user" type="posixUserType" minOccurs="0" maxOccurs="unbounded" />
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="groups" minOccurs="0" maxOccurs="1">
+                                <xs:annotation>
+                                    <xs:documentation>
+                                        List of groups required by this component. If they do not already exist they will be created.
+                                    </xs:documentation>
+                                </xs:annotation>
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="group" type="posixGroupType" minOccurs="0" maxOccurs="unbounded" />
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+
+                <xs:element name="networkConfiguration" minOccurs="0" maxOccurs="1">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <!-- TODO: need to define more clearly what goes in here -->
+                            <!-- Ports list? VLAN configuration? etc ... -->
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+
+                <xs:element name="storageConfiguration" minOccurs="0" maxOccurs="1">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="filesystem" type="filesystemType" minOccurs="0" maxOccurs="unbounded" />
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element> <!-- "component-definition" -->
+
+    <!-- deployment constraints type -->
+    <xs:complexType name="deploymentConstraintsType">
+        <xs:annotation>
+            <xs:documentation>
+                This type represents a list of constraints that apply to a particular aspect of a deployment.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="requiredServices" type="serviceListType" minOccurs="0" maxOccurs="unbounded" />
+            <xs:element name="notAllowedServices" type="serviceListType" minOccurs="0" maxOccurs="unbounded" />
+            <xs:element name="requiredCaches" type="cacheListType" minOccurs="0" maxOccurs="unbounded" />
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>

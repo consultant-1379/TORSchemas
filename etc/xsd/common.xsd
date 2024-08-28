@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:simpleType name="solutionsetNameType">
+        <xs:annotation>
+            <xs:documentation>
+                This defines a Solution Set's name.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[A-Za-z0-9]+"></xs:pattern>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="componentNameType">
+        <xs:annotation>
+            <xs:documentation>
+                This defines a Component's name.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[A-Za-z0-9_-]+"></xs:pattern>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="versionType">
+        <xs:annotation>
+            <xs:documentation>
+                A generic version type of the format X.Y.Z
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[0-9]+\.[0-9]+\.[0-9]+\.?[0-9]*"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:complexType name="componentType">
+        <xs:annotation>
+            <xs:documentation>
+                This defines the name and version of a component.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="name" type="componentNameType" minOccurs="1" maxOccurs="1"/>
+            <xs:element name="version" type = "versionType" minOccurs="1" maxOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:simpleType name="solutionsetTypeType">
+        <xs:annotation>
+            <xs:documentation>
+                This defines the types of solution set we can have. Currently there are two types: basic and
+                commercial. Basic solution sets are required for the base functionality of the platform. Commercial
+                solution sets are features which add value to the base platform and may incur an extra cost.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:pattern value="BASIC|COMMERCIAL"></xs:pattern>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="availabilityModelType">
+        <xs:annotation>
+            <xs:documentation>
+                This type defines the avilability model of the component.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:pattern value="SINGLETON|NWAY-ACTIVE|ACTIVE-PASSIVE"></xs:pattern>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="serviceNameType">
+        <xs:annotation>
+            <xs:documentation>
+                This defines the name of a service.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[0-9A-Za-z_-]+"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="cacheNameType">
+        <xs:annotation>
+            <xs:documentation>
+                This defines the name of a cache.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[0-9A-Za-z_-]+"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:complexType name="serviceListType">
+        <xs:annotation>
+            <xs:documentation>
+                This type represents a list of services.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="service" type="serviceNameType" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="cacheListType">
+        <xs:annotation>
+            <xs:documentation>
+                This type represents a list of caches.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="cache" type="cacheNameType" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:simpleType name="userGroupNameType">
+        <xs:annotation>
+            <xs:documentation>
+                This defines the format of the name of a POSIX user or group.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[0-9A-Za-z_-]+"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="userGroupIdType">
+        <xs:annotation>
+            <xs:documentation>
+                This defines the format of the numeric ID of a POSIX user or group.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:nonNegativeInteger">
+            <!-- TODO: what's the maximum UID possible on RHEL? -->
+            <xs:maxInclusive value="65535" />
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:complexType name="posixUserType">
+        <xs:annotation>
+            <xs:documentation>
+                This type represents a POSIX user account.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="username" type="userGroupNameType" minOccurs="1" maxOccurs="1"/>
+            <xs:element name="userid" type="userGroupIdType" minOccurs="1" maxOccurs="1"/>
+            <xs:element name="primaryGroup" type="posixGroupType" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="groups" minOccurs="0" maxOccurs="1">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="group" type="posixGroupType" minOccurs="0" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="posixGroupType">
+        <xs:annotation>
+            <xs:documentation>
+                This type represents a POSIX user account.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="groupname" type="userGroupNameType" minOccurs="1" maxOccurs="1"/>
+            <xs:element name="groupid" type="userGroupIdType" minOccurs="1" maxOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:simpleType name="filesystemNameType">
+        <xs:annotation>
+            <xs:documentation>
+                This defines the format of the name of a POSIX user or group.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:pattern value="/[/0-9A-Za-z_-]+"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="deviceTypeType">
+        <xs:annotation>
+            <xs:documentation>
+                This defines the format of the name of a POSIX user or group.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:pattern value="LOCAL|DAS|SAN|NAS"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="deviceSizeType">
+        <xs:annotation>
+            <xs:documentation>
+                This defines the format of the name of a POSIX user or group.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[0-9]+[K|M|G|T|P]?"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:complexType name="filesystemType">
+         <xs:annotation>
+            <xs:documentation>
+                This type represents a POSIX user account.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="mountpoint" type="filesystemNameType" minOccurs="1" maxOccurs="1"/>
+            <xs:element name="deviceType" type="deviceTypeType" minOccurs="1" maxOccurs="1"/>
+            <xs:element name="minimumSize" type="deviceSizeType" minOccurs="1" maxOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+
+
+</xs:schema>

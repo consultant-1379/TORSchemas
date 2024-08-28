@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+
+    <xs:include schemaLocation="baseitem.xsd" />
+
+    <xs:complexType name="litp_posixuser_def-restricted-type">
+        <xs:complexContent>
+            <xs:restriction base="baseitem-type">
+                <xs:sequence>
+
+
+                </xs:sequence>
+            </xs:restriction>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="litp_posixuser_def-type">
+        <xs:complexContent>
+            <xs:extension base="litp_posixuser_def-restricted-type">
+                <xs:sequence>
+                    <xs:element name="groups" minOccurs="0" maxOccurs="1">
+                        <xs:annotation>
+                            <xs:documentation>
+                            POSIX User Account Group memberships (comma separated)
+                            </xs:documentation>
+                        </xs:annotation>
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:pattern value="([A-Za-z0-9_][A-Za-z0-9_-]{0,30}([A-Za-z0-9_-]?))(,([A-Za-z0-9_][A-Za-z0-9_-]{0,30}([A-Za-z0-9_-]?)))*"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="name" minOccurs="0" maxOccurs="1">
+                        <xs:annotation>
+                            <xs:documentation>
+                            POSIX User Account Name
+                            </xs:documentation>
+                        </xs:annotation>
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:pattern value="[A-Za-z0-9_][A-Za-z0-9_-]{0,31}"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="seluser" minOccurs="0" maxOccurs="1">
+                        <xs:annotation>
+                            <xs:documentation>
+                            SELinux user type
+                            </xs:documentation>
+                        </xs:annotation>
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:pattern value="[a-zA-Z_]+"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:element name="litp_posixuser_def" type="litp_posixuser_def-type" substitutionGroup="baseitem" />
+</xs:schema>

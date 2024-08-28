@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+targetNamespace="http://www.ericsson.com/litp" xmlns:litp="http://www.ericsson.com/litp">
+    <xs:include schemaLocation="litp_solutionset.xsd" />
+    <xs:include schemaLocation="litp_filesystem_def.xsd" />
+    <xs:include schemaLocation="litp_servicedependency_def.xsd" />
+    <xs:include schemaLocation="litp_cachedependency_def.xsd" />
+    <xs:include schemaLocation="litp_posixuser_def.xsd" />
+    <xs:include schemaLocation="litp_component.xsd" />
+    <xs:include schemaLocation="litp_componentdefinition.xsd" />
+    <xs:include schemaLocation="litp_componentdependency_def.xsd" />
+    <xs:include schemaLocation="litp_service_ref.xsd" />
+</xs:schema>

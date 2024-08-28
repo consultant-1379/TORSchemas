@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+
+    <xs:include schemaLocation="baseitem.xsd" />
+
+    <xs:complexType name="litp_filesystem_def-restricted-type">
+        <xs:complexContent>
+            <xs:restriction base="baseitem-type">
+                <xs:sequence>
+
+
+                </xs:sequence>
+            </xs:restriction>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="litp_filesystem_def-type">
+        <xs:complexContent>
+            <xs:extension base="litp_filesystem_def-restricted-type">
+                <xs:sequence>
+                    <xs:element name="devicetype" minOccurs="0" maxOccurs="1">
+                        <xs:annotation>
+                            <xs:documentation>
+                            The type of filesystem required.
+                            </xs:documentation>
+                        </xs:annotation>
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:pattern value="(LOCAL)|(NAS)|(SAN)|(DAS)"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="minimumsize" minOccurs="0" maxOccurs="1">
+                        <xs:annotation>
+                            <xs:documentation>
+                            The minimum size of the filesystem required by this component. Future versions of this element will also define growth factors. If the filesystem is defined by more than one component the total space required will be aggregated and the actual filesystem created with the total space calculation
+                            </xs:documentation>
+                        </xs:annotation>
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:pattern value="[0-9]+[K|MG|T|P]?"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="mountpoint" minOccurs="0" maxOccurs="1">
+                        <xs:annotation>
+                            <xs:documentation>
+                            The name of the place in the filesystem this filesystem must be mounted at.
+                            </xs:documentation>
+                        </xs:annotation>
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:pattern value="/[/0-9a-zA-Z_\-]+"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="multiplicationfactor" minOccurs="0" maxOccurs="1">
+                        <xs:annotation>
+                            <xs:documentation>
+                            To be decided what this looks like
+                            </xs:documentation>
+                        </xs:annotation>
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:pattern value=".*"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:element name="litp_filesystem_def" type="litp_filesystem_def-type" substitutionGroup="baseitem" />
+</xs:schema>

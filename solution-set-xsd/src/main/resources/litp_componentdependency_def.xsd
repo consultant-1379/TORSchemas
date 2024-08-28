@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+
+    <xs:include schemaLocation="baseitem.xsd" />
+
+    <xs:complexType name="litp_componentdependency_def-restricted-type">
+        <xs:complexContent>
+            <xs:restriction base="baseitem-type">
+                <xs:sequence>
+
+
+                </xs:sequence>
+            </xs:restriction>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="litp_componentdependency_def-type">
+        <xs:complexContent>
+            <xs:extension base="litp_componentdependency_def-restricted-type">
+                <xs:sequence>
+                    <xs:element name="dependency-type" minOccurs="0" maxOccurs="1">
+                        <xs:annotation>
+                            <xs:documentation>
+                            A positive dependency indicates that this component must be present in the defined scope. A negative dependency indicates that this component must not be present in the defined scope.
+                            </xs:documentation>
+                        </xs:annotation>
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:pattern value="(positive)|(negative)"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="min-version" minOccurs="0" maxOccurs="1">
+                        <xs:annotation>
+                            <xs:documentation>
+                            The minimum version of this component that must be present
+                            </xs:documentation>
+                        </xs:annotation>
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:pattern value="[0-9]*\.?[0-9]*\.?[0-9]*"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="name" minOccurs="0" maxOccurs="1">
+                        <xs:annotation>
+                            <xs:documentation>
+                            This is the name of the component referenced in this dependency.
+                            </xs:documentation>
+                        </xs:annotation>
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:pattern value="[\w\-\._/]+"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="scope" minOccurs="0" maxOccurs="1">
+                        <xs:annotation>
+                            <xs:documentation>
+                            The scope in which the dependency must be resolved (container, host or cluster)
+                            </xs:documentation>
+                        </xs:annotation>
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:pattern value="(container)|(host)|(cluster)"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:element name="litp_componentdependency_def" type="litp_componentdependency_def-type" substitutionGroup="baseitem" />
+</xs:schema>

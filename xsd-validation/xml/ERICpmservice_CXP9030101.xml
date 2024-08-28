@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<litp:litp_componentdefinition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:litp="http://www.ericsson.com/litp"
+    xsi:schemaLocation="http://www.ericsson.com/litp target/dependency/litp.xsd"
+    id="ERICpmservice_CXP9030101" version="0.13">
+    <availabilitymodel>NWAY-ACTIVE</availabilitymodel>
+    <description>The PM Service component of the PM Mediation solution set.</description>
+
+    <litp:litp_cachedependency_def id="PMServiceCache">
+        <name>PMServiceCache</name>
+    </litp:litp_cachedependency_def>
+
+    <!-- The definition of this component -->
+    <litp:litp_component id="ERICpmservice_CXP9030101">
+        <name>ERICpmservice_CXP9030101</name>
+        <version>1.1.4</version>
+    </litp:litp_component>
+
+    <!-- a dependency on another component -->
+    <litp:litp_componentdependency_def id="ERICpmmedcore_CXP9030102">
+        <dependency-type>positive</dependency-type>
+        <min-version>1.0.1</min-version>
+        <name>ERICpmmedcore_CXP9030102</name>
+        <scope>cluster</scope>
+    </litp:litp_componentdependency_def>
+
+    <!-- a filesystem required by this component -->
+    <litp:litp_filesystem_def id="pm_data">
+        <devicetype>NAS</devicetype>
+        <minimumsize>10G</minimumsize>
+        <mountpoint>/var/opt/ericsson/pm_data</mountpoint>
+    </litp:litp_filesystem_def>
+
+    <!-- a service this component provides -->
+    <litp:litp_service_ref id="PMService">
+        <name>PMService</name>
+    </litp:litp_service_ref>
+
+    <!-- a dependency on a service, regardless of the component which provides it -->
+    <litp:litp_servicedependency_def id="TopologyService">
+        <dependency-type>positive</dependency-type>
+        <name>TopologyService</name>
+        <scope>cluster</scope>
+    </litp:litp_servicedependency_def>
+</litp:litp_componentdefinition>

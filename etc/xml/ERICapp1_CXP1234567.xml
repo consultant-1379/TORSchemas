@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<componentDefinition xmlns:tor-ss="http://www.ericsson.com/tor-ss"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema-instance"
+    xs:schemaLocation="http://www.ericsson.com/tor-ss ../xsd/solutionset.xsd">
+    <component>
+        <name>ERICapp1_CXP1234567</name>
+        <version>1.2.1</version>
+    </component>
+    <description>
+        This is an attempt at creating an initial definition of a component.
+    </description>
+    <availabilityModel>NWAY-ACTIVE</availabilityModel>
+    <!-- provided services -->
+    <services>
+        <service>TestAppService</service>
+    </services>
+
+    <deploymentRules>
+        <restartRequired>true</restartRequired>
+        <sameJvm>
+            <notAllowedServices>
+                <service>TopologyService</service>
+            </notAllowedServices>
+            <requiredCaches>
+                <cache>TestAppCache</cache>
+            </requiredCaches>
+        </sameJvm>
+        <sameCluster>
+            <requiredServices>
+                <service>ModelService</service>
+            </requiredServices>
+        </sameCluster>
+    </deploymentRules>
+
+    <systemConfiguration>
+        <users>
+            <user>
+                <username>appladm</username>
+                <userid>1000</userid>
+                <primaryGroup>
+                    <groupname>adm</groupname>
+                    <groupid>1000</groupid>
+                </primaryGroup>
+                <groups>
+                    <group>
+                        <groupname>appluser</groupname>
+                        <groupid>1001</groupid>
+                    </group>
+                </groups>
+            </user>
+        </users>
+    </systemConfiguration>
+
+    <!-- TODO: define the network configuration -->
+
+    <storageConfiguration>
+        <filesystem>
+            <mountpoint>/var/opt/ericsson/ericapp1</mountpoint>
+            <deviceType>NAS</deviceType>
+            <minimumSize>10G</minimumSize> <!-- TODO: define scaling factors -->
+        </filesystem>
+    </storageConfiguration>
+</componentDefinition>

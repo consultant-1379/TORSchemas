@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<litp:litp_solutionset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:litp="http://www.ericsson.com/litp"
+    xsi:schemaLocation="http://www.ericsson.com/litp target/dependency/litp.xsd" id="PMMediationSolutionSet" version="0.13">
+    <description>This solution set provides support for the mediation of PM data to an OSS.</description>
+    <name>PMMediationSolutionSet</name>
+    <type>BASIC</type>
+    <version>1.1.2</version>
+    <litp:litp_component id="ERICpmservice_CXP9030101">
+        <name>ERICpmservice_CXP9030101</name>
+        <version>1.1.4</version>
+    </litp:litp_component>
+    <litp:litp_component id="ERICpmmedcore_CXP9030102">
+        <name>ERICpmmedcore_CXP9030102</name>
+        <version>1.1.9</version>
+    </litp:litp_component>
+    <litp:litp_component id="ERICpmmedcom_CXP9030103">
+        <name>ERICpmmedcom_CXP9030103</name>
+        <version>1.1.5</version>
+    </litp:litp_component>
+    <litp:litp_component id="ERICtopsync_CXP9030160">
+        <name>ERICtopsync_CXP9030160</name>
+        <version>1.1.4</version>
+    </litp:litp_component>
+    <litp:litp_component id="ERICdatapersist_CXP9030106">
+        <name>ERICdatapersist_CXP9030106</name>
+        <version>1.1.9</version>
+    </litp:litp_component>
+</litp:litp_solutionset>
